@@ -1,0 +1,57 @@
+{
+  "swagger": "2.0",
+  "host": "",
+  "basePath": "/api",
+  "schemes": ["http"],
+  "info": {
+    "title": "qr-record API",
+    "version": "1.0.0"
+  },
+  "tags": [],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/record": {
+      "post": {
+        "summary": "데이터를 보냅니다.",
+        "description": "QR 코드의 데이터를 보냅니다.",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/DataModel"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/ResponseModel"
+            },
+            "description": "Successful"
+          }
+        }
+      }
+    }
+  },
+
+  "definitions": {
+    "DataModel": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "string"
+        }
+      }
+    },
+    "ResponseModel": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}
