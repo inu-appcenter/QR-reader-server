@@ -13,9 +13,11 @@ function router() {
       } else {
         const [sId, createdAt, time] = data.split("\n");
         if (sId && createdAt && time) {
-          const query = `INSERT INTO qr_record (studentId, entryDate, entryTime) VALUES (?, ?, ?)`;
-          await executeQuery(query, [sId, createdAt, time]);
-          res.status(201).json({ success: true });
+          let query = `INSERT INTO qr_record (studentId, entryDate, entryTime) VALUES (?, ?, ?)`;
+          let result = await executeQuery(query, [sId, createdAt, time]);
+          query = `SELECT * FROM qr_record WHERE id = ?`;
+          const data = await executeQuery(query, [result.insertId]);
+          res.status(201).json({ success: true, data });
         } else {
           res.status(400).json({ success: false, message: "데이터 형식이 잘못됨" });
         }
