@@ -12,6 +12,18 @@
   "produces": ["application/json"],
   "paths": {
     "/record": {
+      "get": {
+        "summary": "모든 기록을 조회합니다.",
+        "description": "저장된 모든 방문 기록을 조회합니다.",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/GetListResponseModel"
+            },
+            "description": "Successful"
+          }
+        }
+      },
       "post": {
         "summary": "데이터를 보냅니다.",
         "description": "QR 코드의 데이터를 보냅니다.",
@@ -27,7 +39,7 @@
         "responses": {
           "201": {
             "schema": {
-              "$ref": "#/definitions/ResponseModel"
+              "$ref": "#/definitions/PostResponseModel"
             },
             "description": "Successful"
           }
@@ -37,6 +49,26 @@
   },
 
   "definitions": {
+    "RecordModel": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "number"
+        },
+        "studentId": {
+          "type": "string"
+        },
+        "entryDate": {
+          "type": "string"
+        },
+        "entryTime": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string"
+        }
+      }
+    },
     "DataModel": {
       "type": "object",
       "properties": {
@@ -45,11 +77,25 @@
         }
       }
     },
-    "ResponseModel": {
+    "PostResponseModel": {
       "type": "object",
       "properties": {
         "success": {
           "type": "boolean"
+        }
+      }
+    },
+    "GetListResponseModel": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecordModel"
+          }
         }
       }
     }
