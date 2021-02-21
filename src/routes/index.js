@@ -3,6 +3,15 @@ const { executeQuery } = require("../configs/database/pool");
 const route = require("express").Router();
 
 function router() {
+  route.get("/record", async (req, res, next) => {
+    try {
+      const query = `select * from qr_record`;
+      const result = await executeQuery(query);
+      res.status(200).json({ success: true, data: result });
+    } catch (error) {
+      next(error);
+    }
+  });
   route.post("/record", async (req, res, next) => {
     try {
       const { data } = req.body;

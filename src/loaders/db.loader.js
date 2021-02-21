@@ -11,6 +11,7 @@ async function dbLoader() {
     `CREATE TABLE IF NOT EXISTS qr_record (
           id int(11) NOT NULL AUTO_INCREMENT,
           studentId varchar(100) NOT NULL,
+          buildingId varchar(100) NOT NULL,
           entryDate varchar(100) NOT NULL,
           entryTime varchar(100) NOT NULL,
           createdAt timestamp NOT NULL DEFAULT current_timestamp(),
